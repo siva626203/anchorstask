@@ -20,7 +20,7 @@ function page(state:any) {
      console.log(auth.currentUser?.email);
    })
    .catch((error: any) => {
-     alert(error);
+     console.log(error);
    });
     }
     const Edit=async(short:String)=>{
@@ -44,7 +44,7 @@ function page(state:any) {
             alert("URL Deleted");
             setLoad(Math.random()*3);
           }).catch((err)=>{
-            alert(err)
+            console.log(err)
           })
       }
       
