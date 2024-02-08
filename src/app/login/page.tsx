@@ -12,7 +12,7 @@ function page() {
       try {
         await auth.signInWithPopup(provider);
         await axios
-          .post("http://localhost:3000/api/users", {
+          .post("../api/users", {
             Mail: auth.currentUser?.email,
             Name: auth.currentUser?.displayName,
           })
