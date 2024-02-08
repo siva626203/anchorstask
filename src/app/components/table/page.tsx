@@ -32,7 +32,7 @@ function page(state:any) {
           setLoad(Math.random()*5);
         })
         .catch((err) => {
-          alert(err);
+          console.log(err);
         });
     }
     const Delete = async (short: any) => {

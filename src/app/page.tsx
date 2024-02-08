@@ -54,7 +54,7 @@ export default function Home() {
           setURL("")
         })
         .catch((error: any) => {
-          alert(error);
+          console.log(error);
           console.log(error)
         });
     }else{

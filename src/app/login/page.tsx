@@ -29,14 +29,14 @@ function page() {
             });
           })
           .catch((err: any) => {
-            alert("Your Not Authorized user");
+            console.log("Your Not Authorized user");
           });
           setTimeout(()=>{
              route.push("/dashboard");
           },3000)
        
       } catch (error) {
-        alert(error);
+        console.log(error);
       }
     };
   return (
