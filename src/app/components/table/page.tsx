@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 function page(state:any) {
     const [count,setCount]=useState([])
+    const [reload,setLoad]=useState(Number)
     const route=useRouter()
     const GET_User=async()=>{
  await axios
@@ -22,9 +23,35 @@ function page(state:any) {
      alert(error);
    });
     }
+    const Edit=async(short:String)=>{
+      const long=prompt("Enter Changing URL:")
+      await axios
+        .put("../../api/url", { short: short, long: long })
+        .then((res) => {
+          alert("URL Changed");
+          setLoad(Math.random()*5);
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
+    const Delete = async (short: any) => {
+      const long = confirm("Are you Sure ?");
+      if(long){
+        await axios
+          .patch("../../api/url",{short:short})
+          .then((res) => {
+            alert("URL Deleted");
+            setLoad(Math.random()*3);
+          }).catch((err)=>{
+            alert(err)
+          })
+      }
+      
+    };
     useEffect(()=>{
          GET_User()
-    },[])
+    },[reload])
   return (
     <div>
       <table className="table-auto border-separate border-spacing-2 border border-slate-400 w-full">
@@ -55,24 +82,22 @@ function page(state:any) {
                           <td className="border border-slate-300">
                             <Link
                               target="_blank"
-                              href={"./link/"}
+                              href={`https://anchorstask.vercel.app/link/${e.short}`}
                             >
                               {e.short}
                             </Link>
                           </td>
                           <td className="border border-slate-300">{e.Click}</td>
                           <td className="border border-slate-300">
-                            <button>Edit</button>
+                            <button onClick={event=>Edit(e.short)}>Edit</button>
                           </td>
                           <td className="border border-slate-300">
-                            <button>Delete</button>
+                            <button onClick={event=>Delete(e.short)}>Delete</button>
                           </td>
                         </tr>
                       </>
                     );
                 }))
-              
-            
           )}
         </tbody>
       </table>

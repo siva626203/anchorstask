@@ -16,12 +16,12 @@ function page() {
      route.push('/')
    };
 useEffect(()=>{
-  //  if (
-  //    auth.currentUser?.email === null ||
-  //    auth.currentUser?.email === undefined
-  //  ) {
-  //    route.push("/login");
-  //  }
+   if (
+     auth.currentUser?.email === null ||
+     auth.currentUser?.email === undefined
+   ) {
+     route.push("/login");
+   }
 })
    return (
     <><ToastContainer></ToastContainer><div>

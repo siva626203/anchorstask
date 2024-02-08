@@ -8,9 +8,8 @@ import {auth} from '../../firebase'
 import { useRouter } from "next/navigation";
 import axios from "axios";
 export default function Home() {
-  const [URL,setURL]=useState(String)
+  const [URL,setURL]=useState("")
    const route = useRouter();
-   const [email,setEmail]=useState(String)
     const [result, setResult] = useState(String);
     function generateRandomString(length: any) {
       let result = "";
@@ -22,7 +21,8 @@ export default function Home() {
           Math.floor(Math.random() * charactersLength)
         );
       }
-      setResult(result);
+      setResult(result)
+      return result
     }
   const isValidUrl = () => {
     var urlPattern = new RegExp(
@@ -38,9 +38,10 @@ export default function Home() {
     return !!urlPattern.test(URL)
   };
   const URL_Request=async()=>{
-    generateRandomString(6)
     const check=isValidUrl()
+    
     if(auth.currentUser?.email === undefined){
+
       toast.warn("Must Login to Short the URL")
     }else if(check){
       await axios
@@ -65,6 +66,9 @@ export default function Home() {
      route.push("/");
      route.refresh()
    };
+   useEffect(()=>{
+    setTimeout(()=>{ generateRandomString(6);},3000)
+   })
   return (
     <main className="mt-10 justify-center">
       <ToastContainer />
@@ -88,6 +92,7 @@ export default function Home() {
           placeholder="URL"
           className="h-5 p-5  rounded-2xl w-full"
           onChange={(e) => setURL(e.target.value)}
+          value={URL}
         />
         <button
           onClick={(e) => URL_Request()}

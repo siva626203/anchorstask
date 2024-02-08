@@ -19,7 +19,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Something wrong" }, { status: 500 });
   }
 }
-export async function DELETE(req: Request) {
+export async function PATCH(req: Request) {
   Connection();
   try {
     const res = await req.json();
