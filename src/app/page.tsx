@@ -45,7 +45,7 @@ export default function Home() {
     }else if(check){
       await axios
         .put("./api/users", {
-          Mail: email,
+          Mail: auth.currentUser.email,
           URLS: { long: URL, short: result },
         })
         .then((res) => {
@@ -62,12 +62,9 @@ export default function Home() {
   }
    const logout = async () => {
      await auth.signOut();
-     localStorage.removeItem("email")
      route.push("/");
      route.refresh()
    };
-   const e = String(localStorage.getItem("email"));
-   useEffect(()=>setEmail(e),[])
   return (
     <main className="mt-10 justify-center">
       <ToastContainer />

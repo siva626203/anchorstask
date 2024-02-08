@@ -27,8 +27,6 @@ function page() {
               progress: undefined,
               theme: "light",
             });
-            const e = auth.currentUser?.email;
-           localStorage.setItem("email",String(e));
           })
           .catch((err: any) => {
             alert("Your Not Authorized user");

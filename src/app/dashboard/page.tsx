@@ -12,7 +12,6 @@ import Link from 'next/link';
 function page() {
     const route=useRouter()
    const logout = async() => {
-   localStorage.removeItem("email")
     await auth.signOut();    
      route.push('/')
    };
